@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import {
   Button,
   FieldError,
@@ -17,9 +15,17 @@ import { FcGoogle } from 'react-icons/fc';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-
-
 const LoginPage = () => {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
+  );
+};
+
+'use client';
+
+const LoginForm = () => {
   // UI Interaction States
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +36,7 @@ const LoginPage = () => {
 
   const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
 
-  // Redirectig user to the apply job page 
+  // Redirectig user to the apply job page
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirect') || '/';
 
@@ -55,7 +61,7 @@ const LoginPage = () => {
         email: formData.email,
         password: formData.password,
         rememberMe: true,
-        
+
       });
       if (error) {
         return setError(
@@ -80,7 +86,7 @@ const LoginPage = () => {
        const data = await authClient.signIn.social({
          provider: 'google',
        });
-      
+
       await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (err) {
       setError(err.message || 'Google sign-in failed. Please try again.');
