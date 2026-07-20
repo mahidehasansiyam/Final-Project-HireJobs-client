@@ -13,10 +13,15 @@ export default async function JobsDashboardTable() {
 
   
   const company = await getLogedInRecruiterCompany();
-  // console.log(company);
 
-  // Mapped from your exact data object
-  
+  if (!company || company.length === 0) {
+    return (
+      <div className="w-full bg-[#090a0b] p-8 flex justify-center items-center min-h-screen">
+        <p className="text-[#71717a] text-sm">No company found. Please register a company first.</p>
+      </div>
+    );
+  }
+
   const jobs = await getCompanyJobs(company[0]._id);
   // console.log(jobs);
 

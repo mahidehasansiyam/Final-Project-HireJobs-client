@@ -10,7 +10,12 @@ export const getJobById = async (jobid) => {
   return serverFetch(`/api/jobs/${jobid}`);
 };
 
-export const getCompanyJobs = async (companyId,status="active") => { 
-  const res = await fetch(`${serverUrl}/api/jobs?companyId=${companyId}&status=${status}`);
-  return res.json();
+export const getCompanyJobs = async (companyId,status="active") => {
+  try {
+    const res = await fetch(`${serverUrl}/api/jobs?companyId=${companyId}&status=${status}`);
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
 }

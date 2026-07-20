@@ -44,13 +44,11 @@ const Apply = async ({ params }) => {
   const applications = await getApplicationsByApplicantId(user.id);   
   
   // get user plan details
-  const plan = await getPlansById(user.plan || "seeker_free")  
-  console.log(plan);
-  
+  const plan = await getPlansById(user.plan || "seeker-free");
 
   const job = await getJobById(id);
-  const remainingApplications =
-    plan.maxApplicationsPerMonth - applications.length;
+  const maxApps = plan?.maxApplicationsPerMonth ?? 3;
+  const remainingApplications = maxApps - applications.length;
 
   return (
     <main className="min-h-screen bg-[#090a0b] text-white py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
@@ -60,7 +58,7 @@ const Apply = async ({ params }) => {
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <span className="text-xs font-semibold bg-[#2563eb]/10 text-[#3b82f6] px-2.5 py-0.5 rounded-full border border-[#2563eb]/20 uppercase tracking-wider">
-                {plan.name}
+                {plan?.name || 'Free'}
               </span>
               <span className="text-xs text-[#52525b]">Monthly Usage</span>
             </div>
@@ -71,7 +69,7 @@ const Apply = async ({ params }) => {
               </span>{' '}
               out of{' '}
               <span className="text-white font-bold">
-                {plan.maxApplicationsPerMonth}
+                {maxApps}
               </span>{' '}
               monthly applications.
             </h2>
@@ -88,7 +86,7 @@ const Apply = async ({ params }) => {
         </div>
 
         {/* ================= RENDER CONDITIONAL VIEWS ================= */}
-        {applications.length >= plan.maxApplicationsPerMonth ? (
+        {applications.length >= maxApps ? (
           /* MAX APPLICATIONS EXCEEDED BLOCK */
           <div className="w-full bg-[#121315] border border-white/[0.06] rounded-2xl p-6 sm:p-8 shadow-xl text-center flex flex-col items-center gap-5">
             <div className="w-12 h-12 rounded-xl bg-[#2563eb]/10 border border-[#2563eb]/20 flex items-center justify-center text-[#3b82f6]">
