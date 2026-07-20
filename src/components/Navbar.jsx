@@ -41,13 +41,13 @@ export default function CustomNavbar() {
     });
   }
 
-  if (isPending) {
-    return (
-      <div className="w-full h-20 bg-[#18191b] border border-white/5 rounded-2xl flex items-center justify-center text-sm text-gray-400">
-        Loading...
-      </div>
-    );
-  }
+  // if (isPending) {
+  //   return (
+  //     <div className="w-full h-20 bg-[#18191b] border border-white/5 rounded-2xl flex items-center justify-center text-sm text-gray-400">
+  //       Loading...
+  //     </div>
+  //   );
+  // }
 
   return (
     // Outer page wrapper mimicking the image layout context
