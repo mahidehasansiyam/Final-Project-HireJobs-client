@@ -7,6 +7,7 @@ const db = client.db(process.env.USER_DB_NAME);
 
 export const auth = betterAuth({
   baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
+  trustedOrigins: process.env.TRUSTED_ORIGINS ? process.env.TRUSTED_ORIGINS.split(',') : undefined,
   emailAndPassword: {
     enabled: true,
   },
