@@ -6,6 +6,7 @@ const client = new MongoClient(process.env.MONGODB_URI);
 const db = client.db(process.env.USER_DB_NAME);
 
 export const auth = betterAuth({
+  baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
   emailAndPassword: {
     enabled: true,
   },

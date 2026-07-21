@@ -174,8 +174,9 @@ export default function CustomNavbar() {
             {session ? (
               <div className="flex items-center gap-4">
                 <Button
-                  onClick={() => {
-                    authClient.signOut();
+                  onClick={async () => {
+                    await authClient.signOut();
+                    window.location.href = '/auth/login';
                     setIsOpen(false);
                   }}
                   color="danger"

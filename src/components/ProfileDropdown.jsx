@@ -61,7 +61,11 @@ export  function ProfileDropdown({ session }) {
             </div>
           </Dropdown.Item>
           <Dropdown.Item
-            onAction={() => authClient.signOut()}
+            onAction={async () => {
+              await authClient.signOut();
+              router.push('/auth/login');
+              router.refresh();
+            }}
             id="logout"
             textValue="Logout"
             variant="danger"

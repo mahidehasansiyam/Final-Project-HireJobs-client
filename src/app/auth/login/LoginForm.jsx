@@ -77,6 +77,7 @@ const LoginForm = () => {
     try {
        const data = await authClient.signIn.social({
          provider: 'google',
+         callbackURL: redirectTo,
        });
 
       await new Promise(resolve => setTimeout(resolve, 1000));
