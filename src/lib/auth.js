@@ -22,10 +22,12 @@ export const auth = betterAuth({
   user: {
     additionalFields: {
       role: {
-        default: 'seeker',
+        type: 'string',
+        defaultValue: 'seeker',
       },
       plan: {
-        default: 'seeker-free',
+        type: 'string',
+        defaultValue: 'seeker-free',
       },
     },
   },
